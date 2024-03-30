@@ -293,6 +293,19 @@ module.exports = function (webpackEnv) {
       ],
     },
     resolve: {
+      fallback: {
+        "zlib": require.resolve("browserify-zlib"),
+        "querystring": require.resolve("querystring-es3"),
+        "path": require.resolve("path-browserify"),
+        "fs": false, // Assuming you've already handled 'fs' as per the previous advice.
+        "net": false, // Assuming 'net' is also handled.
+        "stream": require.resolve("stream-browserify"),
+        "crypto": require.resolve("crypto-browserify"),
+        "http": require.resolve("stream-http"),
+        "process": require.resolve('process/browser'),
+        "vm": require.resolve("vm-browserify"),
+        "async_hooks": false, // Use false if there's no browser-friendly version
+      },
       // This allows you to set a fallback for where webpack should look for modules.
       // We placed these paths second because we want `node_modules` to "win"
       // if there are any conflicts. This matches Node resolution mechanism.
