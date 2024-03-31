@@ -4,7 +4,6 @@ import Button from '../button/button.component';
 import { 
     signInWithGooglePopup, 
     createUserDocumentFromAuth,
-    signInWithEmailAndPassword,
     signInAuthUserWithEmailAndPassword,
      } from "../../utils/firebase/firebase.utils";
 
@@ -33,14 +32,14 @@ const SignInForm = () => {
         event.preventDefault();
 
         try {
-            const response = await signInAuthUserWithEmailAndPassword(email, password);
+            const response = await signInAuthUserWithEmailAndPassword(
+                email, 
+                password
+                );
             console.log(response);
             resetFormFields();
         } catch (error) {
             switch (error.code) {
-                case 'auth/popup-closed-by-user':
-                    alert('google sign-in closed by user');
-                    break;
                 case 'auth/invalid-credential':
                     alert('either incorrect email or password');
                     break;
@@ -50,7 +49,7 @@ const SignInForm = () => {
                 default:
                     console.log(error);
             }            
-        }    
+        }
     };
 
     const handleChange = (event) => {
